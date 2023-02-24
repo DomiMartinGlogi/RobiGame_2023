@@ -15,6 +15,7 @@ public class HighScoreWriter {
 
     public void writeHighScores(){
         try{
+            list.sort(HighScore::compareTo);
             if (!file.exists()){
                 file.createNewFile();
             }
