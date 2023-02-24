@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Processing extends PApplet {
     State state;
-    String playerState;
+    String playerState = "";
     int[] blue = {0,0,255};
     int[] red = {255,0,0};
     int[] green = {0,255,0};
@@ -40,17 +40,22 @@ public class Processing extends PApplet {
         switch (state){
             case START:
                 drawStart();
+                break;
             case GAME:
                 drawGame();
+                break;
             case END:
                 drawEnd();
+                break;
             default:
                 exit();
         }
     }
 
     public void drawStart(){
-
+        fill(255);
+        textFont(f);
+        text("Press Space to start", (int)width/2, (int) height/2);
     }
 
     public void drawGame(){
@@ -148,7 +153,29 @@ public class Processing extends PApplet {
     }
 
     public void drawEnd(){
-
+        fill(255);
+        textFont(f);
+        int stator;
+        if (playerState.equals("win")){
+            stator = 1;
+        }
+        if (playerState.equals("lose")){
+            stator = 0;
+        }
+        else stator = -1;
+        switch (stator){
+            case 1:
+                text("You win!",(int)(0.5 * width), 150);
+                break;
+            case 0:
+                text("You lose!",(int)(0.5 * width), 150);
+                break;
+            default:
+                break;
+        }
+        var scoreString = "You scored " + player.getScore() + " points";
+        text(scoreString,(int)(width * 0.5),250);
+        text("Press e to leave or r to play again",(int)(width*0.5),350);
     }
 
     public void keyPressed(){
