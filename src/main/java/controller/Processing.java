@@ -23,6 +23,7 @@ public class Processing extends PApplet {
     int frame = 0;
     int multiplier = 1;
     int scoreGain = 0;
+    ArrayList<HighScore> scores;
     public void settings(){
         size(800, 600);
         frameRate = 60;
@@ -34,6 +35,8 @@ public class Processing extends PApplet {
             gems.add(new Gem(50,green,this));
         }
         f = createFont("Arial",32,true);
+        HighScoreReader r = new HighScoreReader();
+        scores = r.readHighScores();
     }
 
     public void draw(){
@@ -57,6 +60,12 @@ public class Processing extends PApplet {
         fill(255);
         textFont(f);
         text("Press Space to start", (int)width/2, (int) height/2);
+        String highScores = "";
+        for (HighScore hs: scores) {
+            highScores += hs.toString();
+            highScores += "\n";
+        }
+        text(highScores,15,15);
     }
 
     public void drawGame(){
