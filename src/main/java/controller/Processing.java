@@ -137,15 +137,13 @@ public class Processing extends PApplet {
 
         // Checks End Condition
         if (gems.size() == 0 || lives == 0){
-            if (lives == 0){
-                println("You lose!" +
-                        "\n Your Score is: ", player.getScore());
-            }
             if (gems.size() == 0){
-                println("You win!" +
-                        "\nYour Score is: ", player.getScore());
+                playerState = "win";
             }
-            exit();
+            if (lives == 0){
+                playerState = "lose";
+            }
+            state = State.END;
         }
     }
 
