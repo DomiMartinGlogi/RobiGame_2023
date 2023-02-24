@@ -7,6 +7,7 @@ import processing.core.PFont;
 import java.util.ArrayList;
 
 public class Processing extends PApplet {
+    String playerName = "";
     State state;
     String playerState = "";
     int[] blue = {0,0,255};
@@ -47,7 +48,7 @@ public class Processing extends PApplet {
             case GAME:
                 drawGame();
                 break;
-            case END:
+            case END,TYPING:
                 drawEnd();
                 break;
             default:
@@ -65,7 +66,7 @@ public class Processing extends PApplet {
             highScores += hs.toString();
             highScores += "\n";
         }
-        text(highScores,15,15);
+        text(highScores,15,35);
     }
 
     public void drawGame(){
@@ -186,7 +187,8 @@ public class Processing extends PApplet {
         }
         var scoreString = "You scored " + player.getScore() + " points";
         text(scoreString,(int)(width * 0.5),250);
-        text("Press e to leave or r to play again",(int)(width*0.1),350);
+        text("Press e to leave \n Press r to play again \n Press y to add your name \n Press ENTER to confirm",(int)(width*0.3),350);
+        if (state == State.TYPING){text("Your name: " + playerName, 50, 150);}
     }
 
     public void keyPressed(){
@@ -215,6 +217,32 @@ public class Processing extends PApplet {
                         gems = new ArrayList<Gem>();
                         gemRegen();
                         state = State.GAME;
+                        break;
+                    case 'y':
+                        state = State.TYPING;
+                        break;
+                }
+            case TYPING:
+                if (key == '\n'){
+                    state = State.END;
+                    HighScore hsNew = new HighScore(playerName,player.getScore());
+                    scores.add(hsNew);;
+                    HighScoreWriter w = new HighScoreWriter(scores);
+                    w.writeHighScores();
+                    playerName = "";
+                    return;
+                }
+                if (key == BACKSPACE){
+                    int last = playerName.length() - 1;
+                    char[] chars = playerName.toCharArray();
+                    playerName = "";
+                    for (int i = 0; i < last - 1; i++) {
+                        playerName += chars[i];
+                    }
+                    break;
+                } else {
+                    playerName += key;
+                    break;
                 }
         }
     }
