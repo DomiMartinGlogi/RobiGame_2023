@@ -26,7 +26,7 @@ public class HighScoreWriter {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("File was not created or unable to exist.");
+            System.out.println("File was not created or is unable to exist.");
         }
     }
 }
