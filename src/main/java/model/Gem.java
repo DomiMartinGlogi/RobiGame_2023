@@ -10,7 +10,7 @@ public class Gem extends Entity {
     public int value;
     PApplet window;
 
-    int[] colour;
+    public int[] colour;
     public boolean exists = true;
 
     public Gem(int value, int[] colour, PApplet window){

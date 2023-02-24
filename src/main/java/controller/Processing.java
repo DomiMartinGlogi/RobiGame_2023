@@ -53,6 +53,7 @@ public class Processing extends PApplet {
     }
 
     public void drawStart(){
+        background(0);
         fill(255);
         textFont(f);
         text("Press Space to start", (int)width/2, (int) height/2);
@@ -136,7 +137,7 @@ public class Processing extends PApplet {
         text(liveString,10,120);
 
         // Creates Gems
-        if (random(1) > 0.98f){
+        if (random(1) > 0.99f){
             gems.add(new Gem(100,blue,this));
         }
 
@@ -153,6 +154,7 @@ public class Processing extends PApplet {
     }
 
     public void drawEnd(){
+        background(0);
         fill(255);
         textFont(f);
         int stator;
@@ -175,7 +177,7 @@ public class Processing extends PApplet {
         }
         var scoreString = "You scored " + player.getScore() + " points";
         text(scoreString,(int)(width * 0.5),250);
-        text("Press e to leave or r to play again",(int)(width*0.5),350);
+        text("Press e to leave or r to play again",(int)(width*0.1),350);
     }
 
     public void keyPressed(){
@@ -199,6 +201,10 @@ public class Processing extends PApplet {
                         exit();
                         break;
                     case 'r':
+                        lives = 3;
+                        player.resetScore();
+                        gems = new ArrayList<Gem>();
+                        gemRegen();
                         state = State.GAME;
                 }
         }
@@ -268,4 +274,9 @@ public class Processing extends PApplet {
         }
     }
 
+    private void gemRegen(){
+        for (int i = 0; i < 5; i++) {
+            gems.add(new Gem(50,green,this));
+        }
+    }
 }

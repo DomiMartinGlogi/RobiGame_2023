@@ -85,4 +85,7 @@ public class Robot extends Entity {
         }
     }
 
+    public void resetScore(){
+        score = 0;
+    }
 }
