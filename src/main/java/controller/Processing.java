@@ -214,9 +214,12 @@ public class Processing extends PApplet {
                     case 'r':
                         lives = 3;
                         player.resetScore();
+                        player.resetPos();
                         gems = new ArrayList<Gem>();
                         gemRegen();
-                        state = State.GAME;
+                        robots = new ArrayList<Robot>();
+                        multiplier = 1;
+                        state = State.START;
                         break;
                     case 'y':
                         state = State.TYPING;
@@ -291,6 +294,9 @@ public class Processing extends PApplet {
                 if(currentDist < minDist){
                     nearestGem = g;
                 }
+            }
+            if (nearestGem == null){
+                return;
             }
             if (r.x > nearestGem.x){
                 r.xVel = 0;

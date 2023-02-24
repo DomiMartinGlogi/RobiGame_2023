@@ -88,4 +88,9 @@ public class Robot extends Entity {
     public void resetScore(){
         score = 0;
     }
+
+    public void resetPos(){
+        x = window.width/2;
+        y = window.height/2;
+    }
 }
