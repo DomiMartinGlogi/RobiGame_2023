@@ -243,7 +243,11 @@ public class Processing extends PApplet {
                         playerName += chars[i];
                     }
                     break;
-                } else {
+                }
+                if(key == SHIFT){
+                    break;
+                }
+                else {
                     playerName += key;
                     break;
                 }
